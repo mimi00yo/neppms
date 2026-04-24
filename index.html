@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEPPMS — Your Friendly Health Companion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0A76D8;
+            --primary-soft: #D8EBFA;
+            --secondary: #059669;
+            --secondary-soft: #d1fae5;
+            --accent: #f59e0b;
+            --accent-soft: #fef3c7;
+            --text-dark: #1e1b4b;
+            --text-muted: #64748b;
+            --bg-pure: #ffffff;
+            --bg-cute: #f9fafb;
+            --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background: var(--bg-cute);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Decorative Elements */
+        .decor-blob {
+            position: fixed;
+            z-index: -1;
+            filter: blur(100px);
+            opacity: 0.4;
+            pointer-events: none;
+            animation: drift 25s ease-in-out infinite;
+        }
+
+        .blob-1 {
+            width: 600px;
+            height: 600px;
+            background: #D8EBFA;
+            top: -200px;
+            right: -100px;
+        }
+
+        .blob-2 {
+            width: 500px;
+            height: 500px;
+            background: #e0f2fe;
+            bottom: -150px;
+            left: -100px;
+            animation-delay: -12s;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(40px, -60px) scale(1.1); }
+            66% { transform: translate(-30px, 40px) scale(0.95); }
+        }
+
+        /* Navigation */
+        nav {
+            padding: 24px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-circle {
+            width: 44px;
+            height: 44px;
+            background: var(--primary);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(10, 118, 216, 0.25);
+        }
+
+        .logo-circle svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-btns {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-nav {
+            padding: 10px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-login {
+            color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .btn-login:hover {
+            background: #D8EBFA;
+        }
+
+        .btn-register {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(10, 118, 216, 0.2);
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(10, 118, 216, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            padding: 60px 8% 100px;
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-content {
+            flex: 1;
+            text-align: left;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 550px;
+            border-radius: 30px;
+            box-shadow: var(--card-shadow);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--secondary-soft);
+            color: var(--secondary);
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: clamp(40px, 5vw, 64px);
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 24px;
+            color: var(--text-dark);
+            letter-spacing: -1.5px;
+        }
+
+        h1 span {
+            color: var(--primary);
+        }
+
+        .hero-text {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        .cta-btns {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn-main {
+            padding: 16px 36px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary-main {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 15px 30px -5px rgba(10, 118, 216, 0.4);
+            animation: pulse 2.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(10, 118, 216, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(10, 118, 216, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(10, 118, 216, 0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-secondary-main {
+            background: white;
+            color: var(--text-dark);
+            border: 2px solid #f1f5f9;
+        }
+
+        .btn-secondary-main:hover {
+            background: #f8fafc;
+            border-color: #e2e8f0;
+        }
+
+        /* Stats Bar */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            padding: 60px 8%;
+            background: white;
+            border-radius: 40px;
+            box-shadow: var(--card-shadow);
+            margin: -60px 8% 100px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .stat-item {
+            text-align: center;
+            transition: transform 0.3s ease;
+            animation: fadeInUp 0.8s ease-out backwards;
+        }
+
+        .stat-item:nth-child(1) { animation-delay: 0.1s; }
+        .stat-item:nth-child(2) { animation-delay: 0.2s; }
+        .stat-item:nth-child(3) { animation-delay: 0.3s; }
+        .stat-item:nth-child(4) { animation-delay: 0.4s; }
+
+        .stat-item:hover {
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .stat-val {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Features */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 8% 120px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--card-shadow);
+        }
+
+        .icon-box {
+            width: 64px;
+            height: 64px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .icon-purple { background: #D8EBFA; color: #0A76D8; }
+        .icon-green { background: #f0fdf4; color: #16a34a; }
+        .icon-orange { background: #fffbeb; color: #d97706; }
+
+        .feature-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        footer {
+            background: white;
+            padding: 60px 8% 40px;
+            text-align: center;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        .footer-text strong {
+            color: var(--primary);
+        }
+
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 40px;
+            }
+            .hero-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .cta-btns {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+            .stats {
+                flex-direction: column;
+                gap: 40px;
+                margin-top: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="decor-blob blob-1"></div>
+    <div class="decor-blob blob-2"></div>
+
+    <nav>
+        <a href="#" class="logo">
+            <div class="logo-circle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
+            </div>
+            <div class="logo-text">NEPPMS</div>
+        </a>
+        <div class="nav-btns">
+            <a href="login.php" class="btn-nav btn-login">Login</a>
+            <a href="signup.php" class="btn-nav btn-register">Sign Up</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">
+                ✨ Rated #1 Healthcare Platform
+            </div>
+            <h1>Your Health, <br>Simplified <span>Beautifully.</span></h1>
+            <p class="hero-text">
+                Skip the waiting room. Book your next doctor appointment in seconds with the world's most friendly healthcare companion.
+            </p>
+            <div class="cta-btns">
+                <a href="login.php" class="btn-main btn-primary-main">
+                    Feel Better Today
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="signup.php" class="btn-main btn-secondary-main">Meet the Doctors</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="hero-image-v4.png" alt="Friendly Healthcare">
+        </div>
+    </section>
+
+    <div class="stats">
+        <div class="stat-item">
+            <div class="stat-val">15K+</div>
+            <div class="stat-label">Happy Users</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-val">400+</div>
+            <div class="stat-label">Specialists</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-val">24/7</div>
+            <div class="stat-label">Support</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-val">4.9/5</div>
+            <div class="stat-label">User Rating</div>
+        </div>
+    </div>
+
+    <section class="section-title">
+        <h2>Why You'll Love NEPPMS</h2>
+        <p style="color: var(--text-muted)">Healthcare doesn't have to be complicated.</p>
+    </section>
+
+    <section class="features-grid">
+        <div class="feature-card">
+            <div class="icon-box icon-purple">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <h3>Smart Booking</h3>
+            <p>Our intelligent system finds the best slots for you in real-time. No overlaps, no delays.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon-box icon-green">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Top Security</h3>
+            <p>Your health records are encrypted and protected with state-of-the-art security protocols.</p>
+        </div>
+        <div class="feature-card">
+            <div class="icon-box icon-orange">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+            </div>
+            <h3>Saved History</h3>
+            <p>Access your full visit history anytime. Keep track of your health journey effortlessly.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p class="footer-text">
+            Crafted with ❤️ by <strong>Rashmi</strong> · © 2026 NEPPMS
+        </p>
+    </footer>
+</body>
+
+</html>

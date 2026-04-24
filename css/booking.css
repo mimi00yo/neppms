@@ -1,0 +1,218 @@
+/* Booking Wizard Styles */
+:root {
+    --primary-color: #0a76d8; /* Updated to requested blue shade */
+    --secondary-color: #757575;
+    --bg-light: #f4f7f6;
+    --white: #ffffff;
+    --border-color: #e0e0e0;
+}
+
+.booking-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Progress Bar */
+.progress-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    position: relative;
+    padding: 20px 0;
+}
+
+.progress-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #ccc;
+    z-index: 1;
+    transform: translateY(-50%);
+}
+
+.progress-line-active {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 2px;
+    background: var(--primary-color);
+    z-index: 2;
+    transform: translateY(-50%);
+    transition: width 0.3s ease;
+}
+
+.step-item {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    background: transparent;
+    flex: 1;
+}
+
+.step-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #757575;
+    margin: 0 auto 10px;
+    border: 4px solid #fff;
+    box-shadow: 0 0 0 1px #ccc;
+}
+
+.step-item.active .step-circle {
+    background: var(--primary-color);
+    box-shadow: 0 0 0 1px var(--primary-color);
+}
+
+.step-item.completed .step-circle {
+    background: var(--primary-color);
+}
+
+.step-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+}
+
+.step-item.active .step-label {
+    color: var(--primary-color);
+}
+
+.step-subtext {
+    font-size: 11px;
+    color: #999;
+}
+
+/* Form Styles */
+.booking-card {
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.filter-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.search-group {
+    display: flex;
+    flex: 1;
+}
+
+.input-field {
+    padding: 12px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    outline: none;
+    font-size: 14px;
+}
+
+.search-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+}
+
+/* Doctor List Styles */
+.doctor-card {
+    display: flex;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.doc-info {
+    flex: 1;
+    background: #f8f9fa;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.doc-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.doc-details h3 {
+    margin: 0 0 5px;
+    font-size: 18px;
+}
+
+.doc-slots {
+    flex: 2;
+    padding: 20px;
+}
+
+.slot-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.slot-table th {
+    text-align: left;
+    font-size: 13px;
+    color: #666;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.slot-table td {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.slot-date {
+    font-size: 13px;
+    color: #444;
+}
+
+.slot-tokens {
+    font-size: 13px;
+    color: var(--primary-color);
+}
+
+.proceed-btn {
+    background: var(--primary-color);
+    color: white;
+    padding: 8px 25px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: background 0.2s;
+}
+
+.proceed-btn:hover {
+    background: #006dd3;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.step-page {
+    animation: fadeIn 0.4s ease-out;
+}
